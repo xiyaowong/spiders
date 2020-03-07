@@ -17,18 +17,20 @@ def get(url:str) -> dict:
         'cookie':
         'kg_mid=f679eeece44cf6bec74d2867be4901f7; kg_dfid=2kuKRO3GStCZ0VBY9V12pXeT; Hm_lvt_aedee6983d4cfc62f509129360d6bb3d=1574177549,1576216623,1576386693; kg_mid_temp=f679eeece44cf6bec74d2867be4901f7; kg_dfid_collect=d41d8cd98f00b204e9800998ecf8427e; Hm_lpvt_aedee6983d4cfc62f509129360d6bb3d=1576387198',
     }
-
     song_info_url = "https://wwwapi.kugou.com/yy/index.php"
 
-    hash_pattern = r'"hash":"(.*?)",'
-
-    with requests.get(url, headers=headers, timeout=10) as rep:
-        if rep.status_code == 200:
-            hash = re.findall(hash_pattern, rep.text)
-        if not hash:
-            data["msg"] = "关键信息获取失败"
-            return data
+    hash = re.findall(r"hash=([a-zA-Z0-9]+)", url)
+    if hash:
         hash = hash[0]
+    else:
+        hash_pattern = r'"hash":"(.*?)",'
+        with requests.get(url, headers=headers, timeout=10) as rep:
+            if rep.status_code == 200:
+                hash = re.findall(hash_pattern, rep.text)
+            if not hash:
+                data["msg"] = "关键信息获取失败"
+                return data
+            hash = hash[0]
 
     params = {
         "r": "play/getdata",
