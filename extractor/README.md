@@ -31,10 +31,11 @@ Tips:
 bilibili(哔哩哔哩) | 封面、视频 | :white_check_mark:
 changya(唱鸭) | 音频 | :white_check_mark:
 douyin(抖音) | 无水印视频 | :white_check_mark: |
-kugou(酷狗) | 音频 | |
+kugou(酷狗) | 音频 | :white_check_mark: |
 kuwo(酷我) | 音频 | :white_check_mark: |
 lizhiFM(荔枝FM) | 音频 | :white_check_mark: |
-music163(网易云音乐) | 音频 | |
+music163(网易云音乐) | 音频 |:white_check_mark:|
+qqmusic(QQ音乐) | 音频 | |
 pipigaoxiao(皮皮搞笑) | 无水印视频 | :white_check_mark: |
 quanminkge(全民K歌) | 音频或视频 | :white_check_mark:|
 weibo(微博) | 视频 |:white_check_mark: |
