@@ -44,7 +44,7 @@ def _extract(url: str):
             data = music163.get(url)
         elif "ippzone" in url:
             data = pipigaoxiao.get(url)
-        elif "kg.qq" in url:
+        elif "kg" in url and "qq" in url:
             data = quanminkge.get(url)
         elif "weibo" in url:
             data = weibo.get(url)
@@ -54,6 +54,8 @@ def _extract(url: str):
             data = zhihu_video.get(url)
         elif "zuiyou" in url:
             data = zuiyou_voice.get(url)
+        elif "douyin" in url:
+            data = douyin.get(url)
         else:
             return response(400, message="不支持的链接！")
     except (ConnectTimeout, ConnectTimeout, Timeout):
