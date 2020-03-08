@@ -40,8 +40,8 @@ def get(url:str) -> dict:
             video_url = re.findall(video_pattern, html)
             if singer: data["author"] = singer[0]
             if song_name: data["audioName"] = song_name[0]
-            if audio_url: data["audios"] = audio_url
-            if video_url: data["videos"] = video_url
+            if audio_url: data["audios"] = [url for url in audio_url if url != ""]
+            if video_url: data["videos"] = [url for url in video_url if url != ""]
         else:
             data["msg"] = "获取失败"
 

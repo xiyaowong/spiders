@@ -15,6 +15,7 @@ def get(url: str) -> dict:
     with requests.get(url, headers=headers, timeout=10) as rep:
         if rep.status_code == 200:
             ids = re.findall(r'www.zhihu.com/video/(\d{1,})', rep.text)
+            ids = list(set(ids)) # 去掉重复元素
         else:
             data["msg"] = "视频获取失败，可能是这个页面没有视频"
             return data
@@ -31,8 +32,7 @@ def get(url: str) -> dict:
             if temp:
                 url = temp.get("play_url")
                 videos.append(url)
-    data["videos"] = videos
-
+    data["videos"] = [video for video in videos if video != ""]
     return data
 
 
