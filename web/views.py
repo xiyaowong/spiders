@@ -17,7 +17,7 @@ def extract():
 
 
 def allow():
-    return r"/(bili|changya|kugou|douyin|kuwo|lizhi|music\.163|ippzone|kg\.qq|weibo|weishi|zhihu|zuiyou)/"
+    return r"(bili|changya|kugou|douyin|kuwo|lizhi|music\.163|ippzone|kg\.qq|weibo|weishi|zhihu|zuiyou)"
 
 
 def _extract(url: str):
