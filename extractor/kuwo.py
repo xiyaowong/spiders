@@ -41,7 +41,7 @@ def get(url: str) -> dict:
             pic = rep.json().get("data").get("songinfo").get("pic")
             data["author"] = author
             data["audioName"] = song_name
-            data["imgs"] = [url for url in pic if url != ""]
+            data["imgs"] = [pic]
         else:
             data["msg"] = "获取失败"
             return data
@@ -52,8 +52,8 @@ def get(url: str) -> dict:
     # 得到歌曲链接
     with session.get(mp3_url_format.format(id=id, quality=best_quality), headers=headers, timeout=10) as rep:
         if rep.status_code == 200 and rep.json().get("code") == 200:
-            play_url = rep.json().get("url", "")
-            data["audios"] = [url for url in play_url if url != ""]
+            play_url = rep.json().get("url")
+            data["audios"] = [play_url]
         else:
             data["msg"] = "获取音频链接失败"
 
