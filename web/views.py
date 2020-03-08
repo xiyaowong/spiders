@@ -16,6 +16,10 @@ def extract():
     return _extract(url)
 
 
+def allow():
+    return r"/(bili|changya|kugou|douyin|kuwo|lizhi|music\.163|ippzone|kg\.qq|weibo|weishi|zhihu|zuiyou)/"
+
+
 def _extract(url: str):
     import re
     from requests.exceptions import ConnectionError, ConnectTimeout, Timeout
@@ -61,12 +65,17 @@ def _extract(url: str):
     except (ConnectTimeout, ConnectTimeout, Timeout):
         return response(500)
 
+    # 删除值为空的键
+    for key, value in data.copy().items():
+        if not value:
+            data.pop(key)
+
     return response(data=data)
-
-
 
 
 
 def init_app(app: Flask) -> None:
     app.add_url_rule("/", "home", home)
     app.add_url_rule("/extract/", "extract", extract)
+    app.add_url_rule("/extract/allow/", "allow", allow)
+
