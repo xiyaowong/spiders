@@ -118,7 +118,7 @@ class Wangyiyun():
 
 
 def get(url: str) -> dict:
-    data = {"msg":""}
+    data = {}
     wangyiyun = Wangyiyun()
     url = wangyiyun.get(url)
     if url:

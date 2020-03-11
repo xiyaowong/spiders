@@ -4,7 +4,7 @@ from urllib.parse import urlparse, parse_qs
 import requests
 
 
-data = {"msg": ""}
+data = {}
 headers = {
     "accept": "application/json",
     "accept-encoding": "gzip, deflate, br",

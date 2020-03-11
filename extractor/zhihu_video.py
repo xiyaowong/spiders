@@ -6,7 +6,7 @@ import requests
 def get(url: str) -> dict:
     """
     """
-    data = {"msg":""}
+    data = {}
     headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",}
     video_info_url = "https://lens.zhihu.com/api/v4/videos/{id}"
 

@@ -8,7 +8,7 @@ def get(url: str) -> dict:
     """
     text、audios
     """
-    data = {"msg":""}
+    data = {}
     headers = {
         "Connection": "keep-alive",
         "Content-Length": "209",

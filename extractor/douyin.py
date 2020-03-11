@@ -7,7 +7,7 @@ def get(share_url) -> dict:
     """
     title、videos
     """
-    data = {"msg": ""}
+    data = {}
     headers = {
         'accept':
         'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',

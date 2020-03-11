@@ -8,7 +8,7 @@ def get(url: str) -> dict:
     """
     author、audioName、audios
     """
-    data = {"msg": ""}
+    data = {}
     headers = {
         "Accept": "application/json, text/plain, */*",
         "Accept-Encoding": "gzip, deflate",

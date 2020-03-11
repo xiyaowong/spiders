@@ -8,7 +8,7 @@ def get(url: str) -> dict:
     """
     videos
     """
-    data = {"msg":""}
+    data = {}
     headers = {
         "Host": "share.ippzone.com",
         "Connection": "keep-alive",
