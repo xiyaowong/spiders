@@ -43,3 +43,4 @@ weishi(微视) | 无水印视频 | :white_check_mark: |
 zhihu(知乎) | 视频 |:white_check_mark: |
 zuiyou(最右) | 音频(语音帖评论) |:white_check_mark: |
 qianqian(千千音乐) | 音频 |:white_check_mark: |
+5sing(5sing) | 音频 |:white_check_mark: |
