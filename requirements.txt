@@ -1,0 +1,7 @@
+# extractor
+requests
+
+# web
+flask
+flask-cors
+python-dotenv
