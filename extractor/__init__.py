@@ -1,7 +1,6 @@
 __author__ = "wongxy github:xiyaowong"
 
 __all__ = [
-
     "bilibili",
     "changya",
     "douyin",
@@ -15,4 +14,6 @@ __all__ = [
     "zhihu_video",
     "weishi",
     "zuiyou_voice",
+    "qqmusic",
+    "qianqian",
 ]
