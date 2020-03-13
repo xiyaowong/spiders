@@ -16,5 +16,6 @@ __all__ = [
     "zuiyou_voice",
     "qqmusic",
     "qianqian",
-    "5sing",
+    "sing5",
+    "pipix"
 ]
