@@ -3,7 +3,7 @@ import requests
 
 def get(url: str):
     """
-    author、videoName、imgs、videos
+    author、title、imgs、videos
     """
     data = {}
     headers = {
@@ -22,12 +22,12 @@ def get(url: str):
             return {"msg": "error occurred!"}
 
         author = json["data"]["user_info"]["uname"]
-        videoName = json["data"]["title"]
+        title = json["data"]["title"]
         imgs = [json["data"]["cover_url"]]
         videos = [json["data"]["play"]["url"]]
 
         data["author"] = author
-        data["videoName"] = videoName
+        data["title"] = title
         data["imgs"] = imgs
         data["videos"] = videos
     return data
