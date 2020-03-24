@@ -18,5 +18,7 @@ __all__ = [
     "qianqian",
     "sing5",
     "pipix",
-    "qingshipin"
+    "qingshipin",
+    "qutoutiao",
+    "ku6",
 ]

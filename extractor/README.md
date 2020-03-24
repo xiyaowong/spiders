@@ -47,3 +47,4 @@ qianqian(千千音乐) | 音频 |:white_check_mark: |
 pipix(皮皮虾) | 无水印视频 |:white_check_mark: |
 qingshipin(轻视频) | 无水印视频 |:white_check_mark: |
 qutoutiao(趣头条) | 视频 |:dash: |
+ku6(酷6网) | 视频 |:white_check_mark: |
