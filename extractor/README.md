@@ -49,3 +49,4 @@ qingshipin(轻视频) | 无水印视频 |:white_check_mark: |
 qutoutiao(趣头条) | 视频 |:dash: |
 ku6(酷6网) | 视频 |:white_check_mark: |
 lofter(乐乎) | 视频 |:white_check_mark: |
+open163(网易公开课) | 免费视频 |:white_check_mark: |
