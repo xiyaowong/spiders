@@ -24,4 +24,5 @@ __all__ = [
     "open163",
     "xinpianchang",
     "baidutieba",
+    "kuaishou",
 ]
