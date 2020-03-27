@@ -23,4 +23,5 @@ __all__ = [
     "lofter",
     "open163",
     "xinpianchang",
+    "baidutieba",
 ]

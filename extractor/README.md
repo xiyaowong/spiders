@@ -51,3 +51,4 @@ ku6(酷6网) | 视频 |:white_check_mark: |
 lofter(乐乎) | 视频 |:white_check_mark: |
 open163(网易公开课) | 免费视频 |:white_check_mark: |
 xinpianchang(新片场) | 视频 |:white_check_mark: |
+baidutieba(百度贴吧) | 视频 |:white_check_mark: |
