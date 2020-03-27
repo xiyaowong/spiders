@@ -21,5 +21,6 @@ __all__ = [
     "qutoutiao",
     "ku6",
     "lofter",
-    "open163"
+    "open163",
+    "xinpianchang",
 ]
