@@ -55,3 +55,4 @@ baidutieba(百度贴吧) | 视频 |:white_check_mark: |
 kuaishou(快手) | 无水印视频、长图视频 |:white_check_mark: |
 acfun(AcFun弹幕网) | 视频 |:white_check_mark: |
 haokan(百度好看视频) | 视频 |:white_check_mark: |
+pearvideo(梨视频) | 视频 |:white_check_mark: |

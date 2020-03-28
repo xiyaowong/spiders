@@ -27,4 +27,5 @@ __all__ = [
     "kuaishou",
     "acfun",
     "haokan",
+    "pearvideo",
 ]
