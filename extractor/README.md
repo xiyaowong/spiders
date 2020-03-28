@@ -53,3 +53,4 @@ open163(网易公开课) | 免费视频 |:white_check_mark: |
 xinpianchang(新片场) | 视频 |:white_check_mark: |
 baidutieba(百度贴吧) | 视频 |:white_check_mark: |
 kuaishou(快手) | 无水印视频、长图视频 |:white_check_mark: |
+acfun(AcFun弹幕网) | 视频 |:white_check_mark: |

@@ -25,4 +25,5 @@ __all__ = [
     "xinpianchang",
     "baidutieba",
     "kuaishou",
+    "acfun",
 ]
