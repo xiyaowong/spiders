@@ -26,4 +26,5 @@ __all__ = [
     "baidutieba",
     "kuaishou",
     "acfun",
+    "haokan",
 ]
