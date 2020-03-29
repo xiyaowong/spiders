@@ -17,7 +17,7 @@ def download(url, file_name=None, file_type=None, headers=None):
 
     if file_name is None:
         file_name = str(datetime.now())
-    file_name = file_name.replace("\\", "").replace("/", "")
+    file_name = file_name.replace("\\", "").replace("/", "").replace("#", "")
 
     if file_type is not None:
         if not os.path.exists(f"download/{file_type}"):
