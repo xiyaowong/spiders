@@ -2,3 +2,7 @@
 #### 欢迎**star**:star:
 
 关于爬虫文件在这里 [extractor](/extractor)
+
+```bash
+python3 extract.py
+```
