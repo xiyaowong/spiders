@@ -46,6 +46,8 @@ acfun(AcFun弹幕网) | 视频
 haokan(百度好看视频) | 视频
 pearvideo(梨视频) | 视频
 xiaokaxiu(小咖秀) | 无水印视频
+sohuTV(搜狐视频) | 视频 
+ted(TED) | 视频 
 ========================================
 """
 
@@ -112,6 +114,10 @@ def get(url=None):
         f = zhihu_video
     elif "zuiyou" in url:
         f = zuiyou_voice
+    elif "sohu" in url:
+        f = sohuTV
+    elif "ted" in url:
+        f = ted
     else:
         return {"msg": "链接无法解析"}
     return f.get(url)
