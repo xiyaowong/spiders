@@ -29,4 +29,5 @@ __all__ = [
     "haokan",
     "pearvideo",
     "xiaokaxiu",
+    "sohuTV",
 ]

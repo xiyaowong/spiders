@@ -57,3 +57,4 @@ acfun(AcFun弹幕网) | 视频 |:white_check_mark: |
 haokan(百度好看视频) | 视频 |:white_check_mark: |
 pearvideo(梨视频) | 视频 |:white_check_mark: |
 xiaokaxiu(小咖秀) | 无水印视频 |:white_check_mark: |
+sohuTV(搜狐视频) | 视频 |:white_check_mark: |
