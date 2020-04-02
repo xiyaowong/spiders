@@ -31,4 +31,5 @@ __all__ = [
     "xiaokaxiu",
     "sohuTV",
     "ted",
+    "tudou",
 ]
