@@ -48,6 +48,7 @@ pearvideo(梨视频) | 视频
 xiaokaxiu(小咖秀) | 无水印视频
 sohuTV(搜狐视频) | 视频 
 ted(TED) | 视频 
+tudou(土豆视频) | 视频
 ========================================
 """
 
@@ -70,7 +71,7 @@ def get(url=None):
         f = haokan
     elif "ku6" in url:
         f = ku6
-    elif "chenzhongtech" in url:
+    elif "chenzhongtech" in url or "kuaishou" in url:
         f = kuaishou
     elif "kugou" in url:
         f = kugou
@@ -118,6 +119,8 @@ def get(url=None):
         f = sohuTV
     elif "ted" in url:
         f = ted
+    elif "tudou" in url:
+        f = tudou
     else:
         return {"msg": "链接无法解析"}
     return f.get(url)

@@ -1,30 +1,48 @@
 import os
+import re
 from datetime import datetime
 
+import click
 import requests
+
+
+def filter_name(name):
+    """
+    过滤文件名
+    """
+    regexp = re.compile(r'(/|\\|:|\?|\*|\||"|\'|<|>|\$)')
+    space = re.compile(r'\s{1,}')
+    return space.sub("-", regexp.sub("", name))
+
+
+def check_dir(folder):
+    """
+    检查文件夹是否存在，存在返回True;不存在则创建，返回False
+    """
+    if not os.path.exists(folder):
+        os.mkdir(folder)
+        return False
+    return True
 
 
 def download(url, file_name=None, file_type=None, headers=None):
     """
-    Args:
-        url: 下载资源链接
-        file_name: 保存文件名，默认为当前日期时间
-        file_type: 文件扩展名，有的话就单独创建文件夹
-        headers: http请求头，默认为iphone
+    :param url: 下载资源链接
+    :param file_name: 保存文件名，默认为当前日期时间
+    :param file_type: 文件扩展名，有的话就单独创建文件夹
+    :param headers: http请求头，默认为iphone
     """
-    if not os.path.exists("download"):
-        os.mkdir('download')
+    check_dir("download")
 
     if file_name is None:
         file_name = str(datetime.now())
-    file_name = file_name.replace("\\", "").replace("/", "").replace("#", "")
+    file_name = filter_name(file_name)
 
     if file_type is not None:
-        if not os.path.exists(f"download/{file_type}"):
-            os.mkdir(f"download/{file_type}")
-        file_name = file_type + "/" + file_name + "." + file_type
+        check_dir(f"download/{file_type}")
+        file_name = file_name + "." + file_type
     else:
-        file_type = ""
+        file_type = "default"
 
     if headers is None:
         headers = {
@@ -32,24 +50,19 @@ def download(url, file_name=None, file_type=None, headers=None):
             "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B137 Safari/601.1"
         }
 
-    rep = requests.get(url, headers=headers, stream=True)
-    rep.raise_for_status()
-
-    content_length = int(rep.headers['Content-Length'])
-    count = 1024
-    with open(f"download/{file_name}", 'wb') as file:
-        print("=================================================")
-        print('正在下载{}，大小为：{:.2}m'.format(file_name, (content_length / 1024.0 / 1024)))
-        for chunk in rep.iter_content(chunk_size=1024):
-            if chunk:
-                file.write(chunk)
-                print('{}/100\r'.format(int(count * 100 / content_length)), end='', flush=True)
-                count += 1024
-        print(f'{file_name}下载成功')
-        print("=================================================")
-
-
-if __name__ == "__main__":
-    url = "https://cn-hncs-gd-bcache-08.bilivideo.com/upgcxcode/50/22/151882250/151882250-1-16.mp4?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1581866986&gen=playurl&os=bcache&oi=1999373771&trid=eb5d3963b9e148acb4bd960343a5f9e4h&platform=html5&upsig=b2251c540a8d5765cceee48b89887fa2&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=0&origin_cdn=ks3"
-    file = "test.mp4"
-    download(url, file)
+    # 下载提示
+    print(f"Downloading {file_name}")
+    with requests.get(url, headers=headers, stream=True) as rep:
+        file_size = int(rep.headers['Content-Length'])
+        if rep.status_code != 200:
+            print("下载失败")
+            return False
+        label = '{:.2f}MB'.format(file_size / (1024 * 1024))
+        with click.progressbar(length=file_size, label=label) as progressbar:
+            with open(f"download/{file_type}/{file_name}", "wb") as f:
+                for chunk in rep.iter_content(chunk_size=1024):
+                    if chunk:
+                        f.write(chunk)
+                        progressbar.update(1024)
+        print("下载成功")
+        return True
