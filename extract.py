@@ -1,11 +1,17 @@
 #! python
 import argparse
 
-from extractor import *
+from extractor import (
+    acfun, baidutieba, bilibili, changya, douyin, haokan, ku6, kuaishou, kugou,
+    kuwo, lizhiFM, lofter, music163, open163, pearvideo, pipigaoxiao, pipix,
+    qianqian, qingshipin, qqmusic, quanminkge, qutoutiao, sing5, sohuTV, ted,
+    tudou, wechat_article_cover, weibo, weishi, xiaokaxiu, xinpianchang,
+    zhihu_video, zuiyou_voice
+)
 from utils import download
 
 # 乱七八糟，奇奇怪怪，凑合用（笑
-tips = """
+tips = r"""
  _______  _______ _________ ______   _______  _______
 (  ____ \(  ____ )\__   __/(  __  \ (  ____ \(  ____ )
 | (    \/| (    )|   ) (   | (  \  )| (    \/| (    )|
@@ -15,40 +21,40 @@ tips = """
 /\____) || )      ___) (___| (__/  )| (____/\| ) \ \__
 \_______)|/       \_______/(______/ (_______/|/   \__/
 
-爬取并下载部分资源@wongxy
+爬取并下载部分资源@wongxy github.com/xiyaowong
 ========================================
-bilibili(哔哩哔哩) | 封面、视频
-changya(唱鸭) | 音频
-douyin(抖音) | 无水印视频
-kugou(酷狗) | 音频
-kuwo(酷我) | 音频
-lizhiFM(荔枝FM) | 音频
-music163(网易云音乐) | 音频
-qqmusic(QQ音乐) | 音频
-pipigaoxiao(皮皮搞笑) | 无水印视频
-quanminkge(全民K歌) | 音频或视频
-weibo(微博) | 视频
-weishi(微视) | 无水印视频
-zhihu(知乎) | 视频
-zuiyou(最右) | 音频(语音帖评论)
-qianqian(千千音乐) | 音频
-5sing(5sing) | 音频
-pipix(皮皮虾) | 无水印视频
-qingshipin(轻视频) | 无水印视频
-qutoutiao(趣头条) | 视频
-ku6(酷6网) | 视频
-lofter(乐乎) | 视频
-open163(网易公开课) | 免费视频
-xinpianchang(新片场) | 视频
-baidutieba(百度贴吧) | 视频
-kuaishou(快手) | 无水印视频、长图视频
-acfun(AcFun弹幕网) | 视频
-haokan(百度好看视频) | 视频
-pearvideo(梨视频) | 视频
-xiaokaxiu(小咖秀) | 无水印视频
-sohuTV(搜狐视频) | 视频 
-ted(TED) | 视频 
-tudou(土豆视频) | 视频
+bilibili（哔哩哔哩） | 封面、视频
+changya（唱鸭) | 音频
+douyin（抖音) | 无水印视频
+kugou（酷狗) | 音频
+kuwo（酷我) | 音频
+lizhiFM（荔枝FM) | 音频
+music163（网易云音乐) | 音频
+qqmusic（QQ音乐) | 音频
+pipigaoxiao（皮皮搞笑) | 无水印视频
+quanminkge（全民K歌) | 音频或视频
+weibo（微博) | 视频
+weishi（微视) | 无水印视频
+zhihu（知乎) | 视频
+zuiyou（最右) | 音频（语音帖评论)
+qianqian（千千音乐) | 音频
+5sing（5sing) | 音频
+pipix（皮皮虾) | 无水印视频
+qingshipin（轻视频) | 无水印视频
+qutoutiao（趣头条) | 视频
+ku6（酷6网) | 视频
+lofter（乐乎) | 视频
+open163（网易公开课) | 免费视频
+xinpianchang（新片场) | 视频
+baidutieba（百度贴吧) | 视频
+kuaishou（快手) | 无水印视频、长图视频
+acfun（AcFun弹幕网) | 视频
+haokan（百度好看视频) | 视频
+pearvideo（梨视频) | 视频
+xiaokaxiu（小咖秀) | 无水印视频
+sohuTV（搜狐视频) | 视频
+ted（TED) | 视频
+tudou（土豆视频) | 视频
 ========================================
 """
 
