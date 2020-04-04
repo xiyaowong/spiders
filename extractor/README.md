@@ -41,7 +41,8 @@ quanminkge(全民K歌) | 音频或视频 | :white_check_mark:|
 weibo(微博) | 视频 |:white_check_mark: |
 weishi(微视) | 无水印视频 | :white_check_mark: |
 zhihu(知乎) | 视频 |:white_check_mark: |
-zuiyou(最右) | 音频(语音帖评论) |:white_check_mark: |
+zuiyou_voice(最右) | 音频(语音帖评论) |:white_check_mark: |
+zuiyou_video(最右) | 视频 | :white_check_mark: |
 qianqian(千千音乐) | 音频 |:white_check_mark: |
 5sing(5sing) | 音频 |:white_check_mark: |
 pipix(皮皮虾) | 无水印视频 |:white_check_mark: |

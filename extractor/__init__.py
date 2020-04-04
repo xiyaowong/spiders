@@ -13,6 +13,7 @@ __all__ = [
     "zhihu_video",
     "weishi",
     "zuiyou_voice",
+    "zuiyou_video",
     "qqmusic",
     "qianqian",
     "sing5",
