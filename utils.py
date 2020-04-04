@@ -15,12 +15,12 @@ def filter_name(name):
     return space.sub("-", regexp.sub("", name))
 
 
-def check_dir(folder):
+def check_dir(path):
     """
     检查文件夹是否存在，存在返回True;不存在则创建，返回False
     """
-    if not os.path.exists(folder):
-        os.mkdir(folder)
+    if not os.path.exists(path):
+        os.makedirs(path)
         return False
     return True
 
