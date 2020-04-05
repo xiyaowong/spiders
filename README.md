@@ -6,7 +6,7 @@
 python3 extract.py
 ```
 * #### screenshot
-![](https://s1.ax1x.com/2020/04/05/GrkYvT.gif)
+![example.gif](/screenshot/example.gif)
 
 * #### release
 
