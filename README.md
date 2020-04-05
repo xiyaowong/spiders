@@ -6,4 +6,4 @@
 ```bash
 python3 extract.py
 ```
-[直接用点这里release](/releases)
+直接用请看release
