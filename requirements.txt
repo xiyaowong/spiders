@@ -1,6 +1,10 @@
 # extractor
 requests
 
+# extract
+prettytable
+click
+
 # web
 flask
 flask-cors

@@ -1,17 +1,19 @@
-#! python
-import argparse
+import re
 
-from extractor import (
-    acfun, baidutieba, bilibili, changya, douyin, haokan, ku6, kuaishou, kugou,
-    kuwo, lizhiFM, lofter, music163, open163, pearvideo, pipigaoxiao, pipix,
-    qianqian, qingshipin, qqmusic, quanminkge, qutoutiao, sing5, sohuTV, ted,
-    tudou, wechat_article_cover, weibo, weishi, xiaokaxiu, xinpianchang,
-    zhihu_video, zuiyou_voice
-)
+from prettytable import PrettyTable
+from requests.exceptions import ConnectTimeout, ConnectionError
+
+from extractor import (acfun, baidutieba, bilibili, changya, douyin, haokan,
+                       ku6, kuaishou, kugou, kuwo, lizhiFM, lofter, music163,
+                       open163, pearvideo, pipigaoxiao, pipix, qianqian,
+                       qingshipin, qqmusic, quanminkge, qutoutiao, sing5,
+                       sohuTV, ted, tudou, wechat_article_cover, weibo, weishi,
+                       xiaokaxiu, xinpianchang, zhihu_video, zuiyou_voice)
+
 from utils import download
 
 # 乱七八糟，奇奇怪怪，凑合用（笑
-tips = r"""
+logo = r"""
  _______  _______ _________ ______   _______  _______
 (  ____ \(  ____ )\__   __/(  __  \ (  ____ \(  ____ )
 | (    \/| (    )|   ) (   | (  \  )| (    \/| (    )|
@@ -19,44 +21,51 @@ tips = r"""
 (_____  )|  _____)   | |   | |   | ||  __)   |     __)
       ) || (         | |   | |   ) || (      | (\ (
 /\____) || )      ___) (___| (__/  )| (____/\| ) \ \__
-\_______)|/       \_______/(______/ (_______/|/   \__/
-
-爬取并下载部分资源@wongxy github.com/xiyaowong
-========================================
-bilibili（哔哩哔哩） | 封面、视频
-changya（唱鸭) | 音频
-douyin（抖音) | 无水印视频
-kugou（酷狗) | 音频
-kuwo（酷我) | 音频
-lizhiFM（荔枝FM) | 音频
-music163（网易云音乐) | 音频
-qqmusic（QQ音乐) | 音频
-pipigaoxiao（皮皮搞笑) | 无水印视频
-quanminkge（全民K歌) | 音频或视频
-weibo（微博) | 视频
-weishi（微视) | 无水印视频
-zhihu（知乎) | 视频
-zuiyou（最右) | 音频（语音帖评论)
-qianqian（千千音乐) | 音频
-5sing（5sing) | 音频
-pipix（皮皮虾) | 无水印视频
-qingshipin（轻视频) | 无水印视频
-qutoutiao（趣头条) | 视频
-ku6（酷6网) | 视频
-lofter（乐乎) | 视频
-open163（网易公开课) | 免费视频
-xinpianchang（新片场) | 视频
-baidutieba（百度贴吧) | 视频
-kuaishou（快手) | 无水印视频、长图视频
-acfun（AcFun弹幕网) | 视频
-haokan（百度好看视频) | 视频
-pearvideo（梨视频) | 视频
-xiaokaxiu（小咖秀) | 无水印视频
-sohuTV（搜狐视频) | 视频
-ted（TED) | 视频
-tudou（土豆视频) | 视频
-========================================
-"""
+\_______)|/       \_______/(______/ (_______/|/   \__/"""
+platforms = [
+    ["哔哩哔哩", "封面、视频"],
+    ["唱鸭", "音频"],
+    ["抖音", "无水印视频"],
+    ["酷狗", "音频"],
+    ["酷我", "音频"],
+    ["荔枝FM", "音频"],
+    ["网易云音乐", "音频"],
+    ["QQ音乐", "音频"],
+    ["皮皮搞笑", "无水印视频"],
+    ["全民K歌", "音频&视频"],
+    ["微博", "视频"],
+    ["微视", "无水印视频"],
+    ["知乎", "视频"],
+    ["最右", "音频(语音帖评论)"],
+    ["千千音乐", "音频"],
+    ["5sing", "音频"],
+    ["皮皮虾", "无水印视频"],
+    ["轻视频", "无水印视频"],
+    ["趣头条", "视频"],
+    ["酷6网", "视频"],
+    ["乐乎", "视频"],
+    ["网易公开课", "视频(免费)"],
+    ["新片场", "视频"],
+    ["百度贴吧", "视频"],
+    ["快手", "无水印视频、长图视频"],
+    ["AcFun弹幕网", "视频"],
+    ["百度好看视频", "视频"],
+    ["梨视频", "视频"],
+    ["小咖秀", "无水印视频"],
+    ["搜狐视频", "视频"],
+    ["土豆视频", "视频(免费电视剧等)"],
+    ["TED", "视频"],
+]
+table = PrettyTable(["支持平台", "支持内容"])
+for platform in platforms:
+    table.add_row(platform)
+print(logo)
+print("""
+╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮
+│ @wongxy github.com/xiyaowong │
+╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯""")
+print("爬取并下载部分资源")
+print(table)
 
 
 def get(url=None):
@@ -132,45 +141,68 @@ def get(url=None):
     return f.get(url)
 
 
-parser = argparse.ArgumentParser(description=tips)
-parser.add_argument("-url", type=str, default=None, help="需要解析的链接")
-args = parser.parse_args()
+def spider(url):
+    data = get(url)
 
-url = args.url  # type: str
-if url is None:
-    print(tips)
-data = get(url)
-title = data.get("title")
-author = data.get("author")
-audioName = data.get("audioName")
-videoName = data.get("videoName")
-imgs = data.get("imgs")
-audios = data.get("audios")
-videos = data.get("videos")
-text = data.get("text")
-msg = data.get("msg")
+    title = data.get("title")
+    author = data.get("author")
+    audioName = data.get("audioName")
+    videoName = data.get("videoName")
+    imgs = data.get("imgs")
+    audios = data.get("audios")
+    videos = data.get("videos")
+    text = data.get("text")
+    msg = data.get("msg")
+
+    if msg:
+        print(msg)
+        print()
+
+    if text:
+        print(text)
+        print()
+
+    if imgs:
+        for img in imgs:
+            download(img, file_type="jpg")
+
+    if audios:
+        file_name = (audioName or "") + "-" + (author or "")
+        if file_name == "-":
+            file_name = None
+        for audio in audios:
+            download(audio, file_name=file_name, file_type="mp3")
+
+    if videos:
+        file_name = (videoName or title or "")
+        if file_name == "":
+            file_name = None
+        for video in videos:
+            download(video, file_name=file_name, file_type="mp4")
 
 
-if msg:
-    print(msg)
+if __name__ == "__main__":
+    while True:
+        try:
+            what = input("输入链接http开头(输入任意不包含链接的内容就能退出)：")
 
-if text:
-    print(text)
-
-if imgs:
-    for img in imgs:
-        download(img, file_type="jpg")
-
-if audios:
-    file_name = (audioName or "") + "-" + (author or "")
-    if file_name == "-":
-        file_name = None
-    for audio in audios:
-        download(audio, file_name=file_name, file_type="mp3")
-
-if videos:
-    file_name = (videoName or title or "")
-    if file_name == "":
-        file_name = None
-    for video in videos:
-        download(video, file_name=file_name, file_type="mp4")
+            urls = re.findall(
+                r"https?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]\.[-A-Za-z]+[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", what)
+            if not urls:
+                print("bye~")
+                break
+            print(f"""
+    ╭━━━━━━━━━━━━━╮
+    │ 一共{len(urls)}个链接 │
+    ╰━━━━━━━━━━━━━╯
+            """)
+            for idx, url in enumerate(urls):
+                print(f"正在解析第{idx+1}个链接【{url}】")
+                spider(url)
+                print()
+        except RuntimeError:
+            print("运行超时")
+        except ConnectTimeout:
+            print("网络连接超时")
+        except ConnectionError:
+            print("连接错误")
