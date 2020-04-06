@@ -1,12 +1,11 @@
-import json
-from urllib.parse import urlparse
+import re
 
 import requests
-import re
+
 
 def get(url: str) -> dict:
     """
-    text、videos
+    title、videos
     """
     data = {}
     headers = {
