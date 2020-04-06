@@ -63,4 +63,4 @@ ted(TED) | 视频 |:white_check_mark: |
 tudou(土豆视频) | 视频 |:white_check_mark: |
 quanminxsp(全民小视频) | 视频 | :white_check_mark: |
 lequ(乐趣) | 背景动图、音频 | :white_check_mark: |
-
+peiyinxiu(配音秀) | 视频 | :white_check_mark: |
