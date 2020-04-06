@@ -34,4 +34,5 @@ __all__ = [
     "ted",
     "tudou",
     "quanminxsp",
+    "lequ",
 ]
