@@ -1,15 +1,16 @@
 import re
 
+from flask import current_app
 from requests.exceptions import ConnectionError, ConnectTimeout, Timeout
 
 from ..extractor import (acfun, baidutieba, bilibili, changya, douyin, haokan,
                          ku6, kuaishou, kugou, kuwo, lizhiFM, lofter, music163,
                          open163, pearvideo, pipigaoxiao, pipix, qianqian,
                          qingshipin, qqmusic, quanminkge, qutoutiao, sing5,
-                         sohuTV, ted, tudou, wechat_article_cover, weibo, weishi,
-                         xiaokaxiu, xinpianchang, zhihu_video, zuiyou_voice)
+                         sohuTV, ted, tudou, wechat_article_cover, weibo,
+                         weishi, xiaokaxiu, xinpianchang, zhihu_video,
+                         zuiyou_voice)
 from . import response
-
 
 URL_PATTERN = r"https?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]\.[-A-Za-z]+[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]"
 
@@ -94,7 +95,6 @@ def extract(url: str):  # pylint: disable=too-many-statements
             if not value:
                 data.pop(key)
         return response(data=data, msg=data.get("msg"))
-    except ConnectionError as e:
-        return response(500, error=e, msg="服务器网络连接错误")
-    except (TimeoutError, Timeout) as e:
-        return response(500, error=e, msg="服务器网络连接超时")
+    except Exception as e:
+        current_app.logger.error(e)
+        return response(500, error=e, msg="服务器错误")

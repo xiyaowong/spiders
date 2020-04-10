@@ -15,12 +15,13 @@ def create_app() -> Flask:
     from . import error
     error.init_app(app)
 
+    from . import log
+    log.init_app(app)
+
+    if app.config["ENV"] == "development":
+        print(app.url_map)
+
     return app
 
 
 app = create_app()
-
-
-if __name__ == "__main__":
-    app.run()
-    print(app.url_map)
