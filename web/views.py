@@ -1,6 +1,7 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
+from flask import Flask, request
+
+from . import funcs
+
 from . import response
 
 
@@ -11,71 +12,54 @@ def home():
 
 def extract():
     if "url" not in request.values:
-        return response(404, message="the arg 'url' is reqeuired!")
+        return response(404, msg="the arg 'url' is reqeuired!")
     url = request.values["url"]
-    return _extract(url)
+    return funcs.extract(url)
 
 
 def allow():
-    return r"(bili|changya|kugou|douyin|kuwo|lizhi|music\.163|ippzone|kg\.qq|weibo|weishi|zhihu|zuiyou)"
+    return r"(acfun|tieba|bili|changya|douyin|haokan|ku6|chenzhongtech|kuaishou|kugou|kuwo|lizhi|lofter|music\.163|open\.163|pearvideo|ippzone|pipix|music\.taihe|qingshipin|y\.qq|kg|qutoutiao|5sing|weibo|weishi|xiaokaxiu|zhihu|zuiyou|sohu|ted|tudou)"
 
 
-def _extract(url: str):
-    import re
-    from requests.exceptions import ConnectionError, ConnectTimeout, Timeout
-    from ..extractor import \
-        (
-            bilibili, changya, douyin, kugou, kuwo, lizhiFM, music163, pipigaoxiao,
-            quanminkge, weibo, weishi, zhihu_video, zuiyou_voice
-        )
-    url = re.findall(
-        r"https?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]\.[-A-Za-z]+[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", url)
-    if not url:
-        return response(404, message="无法匹配到链接")
-    url = url[0]
-    try:
-        if "bili" in url:
-            data = bilibili.get(url)
-        elif "changya" in url:
-            data = changya.get(url)
-        elif "kugou" in url:
-            data = kugou.get(url)
-        elif "kuwo" in url:
-            data = kuwo.get(url)
-        elif "lizhi" in url:
-            data = lizhiFM.get(url)
-        elif "music.163" in url:
-            data = music163.get(url)
-        elif "ippzone" in url:
-            data = pipigaoxiao.get(url)
-        elif "kg" in url and "qq" in url:
-            data = quanminkge.get(url)
-        elif "weibo" in url:
-            data = weibo.get(url)
-        elif "weishi" in url:
-            data = weishi.get(url)
-        elif "zhihu" in url:
-            data = zhihu_video.get(url)
-        elif "zuiyou" in url:
-            data = zuiyou_voice.get(url)
-        elif "douyin" in url:
-            data = douyin.get(url)
-        else:
-            return response(400, message="不支持的链接！")
-    except (ConnectTimeout, ConnectTimeout, Timeout):
-        return response(500)
-
-    # 删除值为空的键
-    for key, value in data.copy().items():
-        if not value:
-            data.pop(key)
-
+def desc():
+    data = [["哔哩哔哩", "封面、视频"],
+            ["唱鸭", "音频"],
+            ["抖音", "无水印视频"],
+            ["酷狗", "音频"],
+            ["酷我", "音频"],
+            ["荔枝FM", "音频"],
+            ["网易云音乐", "音频"],
+            ["QQ音乐", "音频"],
+            ["皮皮搞笑", "无水印视频"],
+            ["全民K歌", "音频&视频"],
+            ["微博", "视频"],
+            ["微视", "无水印视频"],
+            ["知乎", "视频"],
+            ["最右", "音频(语音帖评论)"],
+            ["千千音乐", "音频"],
+            ["5sing", "音频"],
+            ["皮皮虾", "无水印视频"],
+            ["轻视频", "无水印视频"],
+            ["趣头条", "视频"],
+            ["酷6网", "视频"],
+            ["乐乎", "视频"],
+            ["网易公开课", "视频(免费)"],
+            ["新片场", "视频"],
+            ["百度贴吧", "视频"],
+            ["快手", "无水印视频、长图视频"],
+            ["AcFun弹幕网", "视频"],
+            ["百度好看视频", "视频"],
+            ["梨视频", "视频"],
+            ["小咖秀", "无水印视频"],
+            ["搜狐视频", "视频"],
+            ["土豆视频", "视频(免费电视剧等)"],
+            ["TED", "视频"],
+            ]
     return response(data=data)
-
 
 
 def init_app(app: Flask) -> None:
     app.add_url_rule("/", "home", home)
     app.add_url_rule("/extract/", "extract", extract)
     app.add_url_rule("/extract/allow/", "allow", allow)
-
+    app.add_url_rule("/extract/desc/", "desc", desc)

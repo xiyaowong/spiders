@@ -1,3 +1,4 @@
+# pylint: disable=unused-argument
 from flask import Flask
 
 from . import response
