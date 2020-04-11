@@ -35,5 +35,6 @@ __all__ = [
     "tudou",
     "quanminxsp",
     "lequ",
-    "peiyinxiu"
+    "peiyinxiu",
+    "tuchong",
 ]
