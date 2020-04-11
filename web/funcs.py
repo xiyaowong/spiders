@@ -1,7 +1,6 @@
 import re
 
 from flask import current_app
-from requests.exceptions import ConnectionError, ConnectTimeout, Timeout
 
 from ..extractor import (acfun, baidutieba, bilibili, changya, douyin, haokan,
                          ku6, kuaishou, kugou, kuwo, lizhiFM, lofter, music163,
@@ -97,4 +96,5 @@ def extract(url: str):  # pylint: disable=too-many-statements
         return response(data=data, msg=data.get("msg"))
     except Exception as e:
         current_app.logger.error(e)
+        current_app.logger.exception(e)
         return response(500, error=e, msg="服务器错误")
