@@ -1,5 +1,6 @@
 # extractor
 requests
+pycryptodome
 
 # extract
 prettytable
