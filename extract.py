@@ -8,7 +8,7 @@ from extractor import (acfun, baidutieba, bilibili, changya, douyin, haokan,
                        open163, pearvideo, pipigaoxiao, pipix, qianqian,
                        qingshipin, qqmusic, quanminkge, qutoutiao, sing5,
                        sohuTV, ted, tudou, wechat_article_cover, weibo, weishi,
-                       xiaokaxiu, xinpianchang, zhihu_video, zuiyou_voice)
+                       xiaokaxiu, xinpianchang, zhihu_video, zuiyou_voice, tuchong)
 
 from utils import download
 
@@ -29,7 +29,7 @@ platforms = [
     ["酷狗", "音频"],
     ["酷我", "音频"],
     ["荔枝FM", "音频"],
-    ["网易云音乐", "音频"],
+    ["网易云音乐", "音频、mv、视频"],
     ["QQ音乐", "音频"],
     ["皮皮搞笑", "无水印视频"],
     ["全民K歌", "音频&视频"],
@@ -55,6 +55,7 @@ platforms = [
     ["搜狐视频", "视频"],
     ["土豆视频", "视频(免费电视剧等)"],
     ["TED", "视频"],
+    ["图虫", "图片"],
 ]
 table = PrettyTable(["支持平台", "支持内容"])
 for platform in platforms:
