@@ -72,24 +72,3 @@ class Wangyiyun():
         if rep.json()['code'] == 200:
             return rep.json()
         return None
-
-
-def get(url: str) -> dict:
-    """
-    aduios或者videos
-    """
-    data = {}
-    wangyiyun = Wangyiyun()
-    resource_url = wangyiyun.get(url)
-    if not resource_url:
-        return {"msg": "获取失败"}
-    if "mv" in url or "video" in url:
-        data["videos"] = [resource_url]
-    elif "song" in url:
-        data["audios"] = [resource_url]
-    return data
-
-
-if __name__ == "__main__":
-    from pprint import pprint
-    pprint(get(input("url: ")))
