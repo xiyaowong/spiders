@@ -10,4 +10,4 @@ python3 extract.py
 
 * #### release
 
-* ####  欢迎**star**:star:
+* ####  欢迎**star**:star: & **fork**
