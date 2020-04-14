@@ -37,4 +37,5 @@ __all__ = [
     "lequ",
     "peiyinxiu",
     "tuchong",
+    "changba",
 ]
