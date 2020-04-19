@@ -32,13 +32,14 @@ def get(url: str) -> dict:
     cover = video_data["video"]["cover"]
     video_list = video_data["resource"]["progressive"]  # type: list
 
-    videos = []
-    for item in video_list:
-        videos.append(item.get("https_url") or item.get("url"))
+    # videos = []
+    # for item in video_list:
+    #     videos.append(item.get("https_url") or item.get("url"))
+    video = video_list[0].get("https_url") or video_list[0].get("url")
 
     data["title"] = title
     data["imgs"] = [cover]
-    data["videos"] = videos
+    data["videos"] = [video]
 
     return data
 
