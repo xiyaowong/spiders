@@ -11,8 +11,8 @@ def filter_name(name):
     过滤文件名
     """
     regexp = re.compile(r'(/|\\|:|\?|\*|\||"|\'|<|>|\$)')
-    space = re.compile(r'\s{1,}')
-    return space.sub("-", regexp.sub("", name))
+    space = re.compile(r'\s{2,}')
+    return space.sub(" ", regexp.sub("", name))
 
 
 def check_dir(path):

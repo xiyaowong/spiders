@@ -38,4 +38,5 @@ __all__ = [
     "peiyinxiu",
     "tuchong",
     "changba",
+    "migu_music"
 ]
