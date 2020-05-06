@@ -73,3 +73,4 @@ Tips:
 |     changba(唱吧)      |         视频         | :white_check_mark: |
 |     migu(咪咕音乐)     |         音频         | :white_check_mark: |
 |       momo(陌陌)       |         视频         | :white_check_mark: |
+|     58pic(千图网)      |         图片         | :white_check_mark: |

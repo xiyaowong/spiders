@@ -39,5 +39,6 @@ __all__ = [
     "tuchong",
     "changba",
     "migu_music",
-    "momo"
+    "momo",
+    "pic58"
 ]
