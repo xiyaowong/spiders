@@ -40,5 +40,6 @@ __all__ = [
     "changba",
     "migu_music",
     "momo",
-    "pic58"
+    "pic58",
+    "qmgx"
 ]
