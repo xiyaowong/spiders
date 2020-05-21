@@ -1,4 +1,5 @@
 import re
+import json
 
 import requests
 
@@ -27,24 +28,25 @@ def get(url: str):
         data["audioName"] = re.findall(r'"songname":"(.*?)"', html)[0]
         data["author"] = re.findall(r'"name":"(.*?)",', html)[0]
 
-
-    # vkey_url = "https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg"
-    # songinfo_url = f"https://u.y.qq.com/cgi-bin/musicu.fcg?-=getUCGI20753546479271834&g_tk=1780073730&hostUin=0&format=json&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq.json&needNewCode=0&data=%7B%22comm%22%3A%7B%22ct%22%3A24%2C%22cv%22%3A0%7D%2C%22songinfo%22%3A%7B%22method%22%3A%22get_song_detail_yqq%22%2C%22param%22%3A%7B%22song_type%22%3A0%2C%22song_mid%22%3A%22{songmid}%22%2C%22song_id%22%3A{songid}%7D%2C%22module%22%3A%22music.pf_song_detail_svr%22%7D%7D"
-    vkey_url = f"https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg?g_tk=5381&loginUin=0&hostUin=0&format=json&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&cid=205361747&uin=3989&songmid={songmid}&filename=C400{songmid}.m4a&guid=9234328946"
-
-    # get vkey
-    with requests.get(vkey_url, headers=ios_headers, timeout=10) as rep:
-        if rep.json()["code"] != 0:
+    # vkey
+    vkey_url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
+    params = {
+        'data': json.dumps({"req": {"module": "CDN.SrfCdnDispatchServer", "method": "GetCdnDispatch", "param": {"guid": "3982823384", "calltype": 0, "userip": ""}}, "req_0": {"module": "vkey.GetVkeyServer", "method": "CgiGetVkey", "param": {"guid": "3982823384", "songmid": [songmid], "songtype": [0], "uin": "0", "loginflag": 1, "platform": "20"}}, "comm": {"uin": 0, "format": "json", "ct": 24, "cv": 0}})
+    }
+    with requests.get(vkey_url, params=params, headers=ios_headers, timeout=10) as rep:
+        if rep.json()["code"] != 0 and rep.json()['req_0']['code'] != 0:
             return {"msg": "提取重要信息失败"}
-        filename = rep.json()["data"]["items"][0]["filename"]
-        vkey = rep.json()["data"]["items"][0]["vkey"]
-        data["audios"] = [f"https://isure.stream.qqmusic.qq.com/{filename}?guid=9234328946&vkey={vkey}&uin=3989&fromtag=66"]
+        data["audios"] = [
+            "https://isure.stream.qqmusic.qq.com/{}".format(rep.json()['req_0']['data']['midurlinfo'][0]['purl'])
+        ]
 
     return data
 
 
 if __name__ == "__main__":
-    print(get(input("url: ")))
+    # print(get(input("url: ")))
+    url = 'https://y.qq.com/n/yqq/song/003tdyG9003JqW.html'
+    print(get(url))
 
 
 # "A000", "ape", 800
