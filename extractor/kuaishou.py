@@ -33,12 +33,12 @@ def get(url: str) -> dict:
         if imgs:
             data['imgs'] = ["https:" + i for i in imgs]
 
-        # video
+        # videos
         hide_data = tree.xpath(r"//div[@id='hide-pagedata']/@data-pagedata")
         if hide_data:
             try:
                 data_ = json.loads(hide_data[0])
-                data['video'] = [data_['video']['srcNoMark']]
+                data['videos'] = [data_['video']['srcNoMark']]
                 data['title'] = data['videoName'] = data_['video']['caption']
             except Exception:
                 pass
