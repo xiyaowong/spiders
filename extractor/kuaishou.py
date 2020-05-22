@@ -50,4 +50,4 @@ def get(url: str) -> dict:
 
 if __name__ == "__main__":
     from pprint import pprint
-    Rprint(get(input("url: ")))
+    pprint(get(input("url: ")))
