@@ -2,9 +2,11 @@
 
 * ####  爬虫文件详情在这里 [extractor](/extractor)
 ---
-```bash
+```shell
+pip3 install -r requirements.txt
 python3 extract.py
 ```
+可能还需要安装nodejs
 * #### screenshot
 ![example.gif](https://cdn.jsdelivr.net/gh/xiyaowong/spiders/screenshot/run.gif)
 
