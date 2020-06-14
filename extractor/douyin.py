@@ -36,8 +36,9 @@ def get(share_url) -> dict:
 
     data["author"] = info["author"]["nickname"]
     data["title"] = data["videoName"] = info["desc"]
-    data["audioName"] = info["music"]["title"]
-    data["audios"] = [info["music"]["play_url"]["uri"]]
+    if info.get('music'):
+        data["audioName"] = info["music"]["title"]
+        data["audios"] = [info["music"]["play_url"]["uri"]]
     # data["imgs"] = [info["video"]["origin_cover"]["url_list"][0]]
 
     # get playwm_url -> play_url
