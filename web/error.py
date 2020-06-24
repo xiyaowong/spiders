@@ -1,7 +1,10 @@
 # pylint: disable=unused-argument
 from flask import Flask
 
-from . import response
+try:
+    import response
+except ImportError:
+    from . import response
 
 
 def init_app(app: Flask):

@@ -1,5 +1,15 @@
 #### 简单提供爬虫api
 
-```bash
-flask run
+
+
+```shell
+pip install gunicorn
+```
+
+```shell
+gunicorn app:app
+
+or
+
+python app.py
 ```
