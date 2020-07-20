@@ -1,3 +1,4 @@
+# 原理：https://www.zhihu.com/question/36081767  代码块直接copy的：https://github.com/CharlesPikachu/Music-Downloader
 import base64
 import codecs
 import json
