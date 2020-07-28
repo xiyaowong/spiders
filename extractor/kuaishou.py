@@ -42,16 +42,19 @@ def get(url: str) -> dict:
         pass
     else:
         data['videoName'] = data['title']
+        data['msg'] = '如果快手视频下载出错请尝试更换网络'
     # 获取图片
     try:  # 如果出错，则可能是普通视频；
         images = video_info['images']
-        imageCDN = video_info['imageCDN']
+        imageCDN: str = video_info['imageCDN']
         # 如果是长图视频，则这几项一定存在
         assert images is not None
         assert imageCDN is not None
     except Exception:
         pass
     else:
+        if not imageCDN.startswith('http'):
+            imageCDN = 'http://' + imageCDN
         data['imgs'] = [imageCDN + i['path'] for i in images]
     return data
 
