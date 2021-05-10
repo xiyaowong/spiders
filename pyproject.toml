@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "spiders"
+version = "0.1.0"
+description = "用fastAPI构建一些解析接口"
+authors = ["wongxy <xiyao.wong@foxmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+httpx = "^0.18.1"
+fastapi = "^0.64.0"
+uvicorn = "^0.13.4"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.8.2"
+black = "^21.5b0"
+isort = "^5.8.0"
+jedi = "0.17.2"
+
+[tool.isort]
+profile = "black"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
